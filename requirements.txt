@@ -1,0 +1,4 @@
+pandas  
+rank_bm25 
+python-dotenv 
+google-genai
