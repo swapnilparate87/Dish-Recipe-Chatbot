@@ -1,4 +1,6 @@
-pandas  
-rank_bm25 
-python-dotenv 
-google-genai
+pandas
+rank_bm25
+python-dotenv
+langchain-nvidia-ai-endpoints
+requests
+streamlit

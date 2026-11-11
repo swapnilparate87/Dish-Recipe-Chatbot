@@ -1,6 +1,7 @@
 """Load the three Recipe Box JSON files into one DataFrame."""
 
 import json
+import re
 from pathlib import Path
 import pandas as pd
 
@@ -22,7 +23,8 @@ def load_recipes():
             clean = [i for i in clean if i]
             instructions = (rec.get("instructions") or "").strip()
             has_text = any(c.isalpha() for c in instructions)  # ";" is not an instruction
-            if title and clean and has_text:  # skip incomplete records
+            is_test = re.match(r"(?i)qa(test|v?\s*\d|\s|$)", title)  # 5 website test pages ("QATest2")
+            if title and clean and has_text and not is_test:  # skip incomplete / test records
                 rows.append({
                     "recipe_id": f"{source}:{key}",
                     "title": title,

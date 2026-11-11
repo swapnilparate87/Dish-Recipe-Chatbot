@@ -7,8 +7,10 @@
 import re
 from functools import lru_cache
 
-from src.rules import (ALIASES, BOILERPLATE, DERIVED, DESCRIPTORS, GROUPS, KEEP_TOGETHER,
+from src.rules import (ALIASES, BOILERPLATE, DERIVED, DESCRIPTORS, FREE_OF, GROUPS, KEEP_TOGETHER,
                        NOT_A, NOT_PLURAL, UNITS)
+
+FREE_WORDS = sorted({w for ws in FREE_OF.values() for w in ws}, key=len, reverse=True)
 
 
 def singular(word):
@@ -44,6 +46,8 @@ def normalize_ingredient(text):
     if t.endswith(":"):                                  # header like "For the sauce:"
         return ()
     t = re.sub(r"\(.*?\)", " ", t).replace("half and half", "half-and-half")
+    # "dairy free cheese" -> "dairy-free cheese" ("free" alone is dropped as a descriptor)
+    t = re.sub(rf"\b({'|'.join(FREE_WORDS)})\s+free\b", r"\1-free", t)
     name = ""
     for part in re.split(r"[,;]", t):                    # name is usually before the comma,
         part = re.sub(r"[^a-z\s-]", " ", part)           # ...but not always: use first
@@ -90,9 +94,17 @@ def group_regex(group, status):
 @lru_cache(maxsize=None)
 def name_status(name, group):
     """'contains', 'uncertain' or 'ok' for ONE canonical name in a group (e.g. 'dairy').
-    Each word found is re-checked with matches(), so NOT_A exceptions apply."""
+    Each word found is re-checked with matches() (NOT_A exceptions) and the group's own
+    exceptions ("rice noodle" is not gluten)."""
+    if re.search(rf"\b({'|'.join(FREE_OF[group])})[- ]free\b", name):  # "nut-free", "gluten free"
+        return "ok"
+    exceptions = GROUPS[group].get("exceptions", {})
+
+    def really(word):
+        return matches(word, name) and not any(has_phrase(x, name) for x in exceptions.get(word, []))
+
     for status in ("contains", "uncertain"):
-        if any(matches(word, name) for word in group_regex(group, status).findall(name)):
+        if any(really(word) for word in group_regex(group, status).findall(name)):
             return status
     return "ok"
 

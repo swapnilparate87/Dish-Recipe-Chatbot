@@ -3,7 +3,7 @@
 # Removed from ingredient strings: units/containers...
 UNITS = set("""
 cup c tablespoon tbsp tbs tbl teaspoon tsp ounce oz pound lb gram g kg kilogram ml l liter
-litre quart qt pint pt gallon fluid fl package pkg packet can jar bottle box bag container
+litre lbs ozs kgs tbsps tsps quart qt pint pt gallon fluid fl package pkg packet can jar bottle box bag container
 carton envelope stick clove head bunch sprig slice piece pinch dash drop handful stalk rib
 sheet strip loaf inch cube scoop splash whole half quarter dozen of a an about plus more
 additional each to taste optional x
@@ -68,7 +68,7 @@ schnapps cereal vinegar wine flour noodle paper syrup milk extract
 """.split())
 
 # Restriction groups. "uncertain" = may or may not contain it -> flag it, never assume safe.
-# Exceptions (coconut milk, peanut butter...) come from NOT_A above.
+# Exceptions (coconut milk, peanut butter...) come from NOT_A above, plus a group's own "exceptions".
 GROUPS = {
     "dairy": {
         "contains": ["milk", "butter", "cream", "cheese", "yogurt", "buttermilk", "ghee", "whey",
@@ -82,7 +82,54 @@ GROUPS = {
                      "peanut", "pine nut", "brazil nut", "nut"],
         "uncertain": ["praline", "marzipan", "nougat", "granola"],
     },
+    "gluten": {
+        "contains": ["wheat", "flour", "bread", "bread crumb", "panko", "crouton", "pasta",
+                     "noodle", "spaghetti", "penne", "macaroni", "linguine", "fettuccine",
+                     "lasagna", "rigatoni", "ziti", "orzo", "tortellini", "ravioli", "couscous",
+                     "fusilli", "linguini", "capellini", "angel hair", "orecchiette", "farfalle",
+                     "rotini", "bucatini", "vermicelli", "pappardelle", "tagliatelle", "gnocchi",
+                     "cavatappi", "ditalini", "manicotti", "cannelloni", "udon", "ramen", "lo mein",
+                     "barley", "rye", "semolina", "bulgur", "farro", "spelt", "seitan", "malt",
+                     "beer", "cracker", "cookie", "biscuit", "pastry", "pie crust", "phyllo",
+                     "croissant", "bagel", "pita", "bun", "pretzel", "wonton wrapper",
+                     "cake mix", "brownie mix", "graham cracker", "matzo", "wheat germ"],
+        "uncertain": ["soy sauce", "oat", "teriyaki sauce", "hoisin sauce", "worcestershire sauce",
+                      "soba", "tortilla", "cream of mushroom soup", "cream chicken soup",
+                      "condensed", "gravy", "bouillon", "seasoning mix", "cereal", "granola",
+                      "breading", "stuffing"],
+        # gluten-free products that contain a gluten word. ONLY for the gluten check:
+        # "no flour" (an ingredient the user named) still removes almond flour.
+        "exceptions": {
+            "flour": ["almond flour", "rice flour", "coconut flour", "corn flour", "potato flour",
+                      "chickpea flour", "tapioca flour", "buckwheat flour", "cassava flour",
+                      "oat flour"],
+            "pasta": ["pasta sauce", "rice pasta"],
+            "noodle": ["rice noodle", "glass noodle", "cellophane noodle", "bean thread noodle",
+                       "shirataki noodle"],
+            "cracker": ["rice cracker"],
+            "vermicelli": ["rice vermicelli"],
+            "spaghetti": ["spaghetti squash"],  # a vegetable
+        },
+    },
 }
+
+# "<word>-free" / "<word> free" means safe for that group: "nut-free", "dairy free", "gluten-free"
+FREE_OF = {"dairy": ["dairy", "lactose", "milk"], "nuts": ["nut", "peanut"],
+           "gluten": ["gluten", "wheat"]}
+
+# Task 2 matching -------------------------------------------------------------------------
+# Assumed to be in every kitchen: not counted as "missing" (listed separately in answers)
+PANTRY = {"salt", "black pepper", "water"}
+
+# Having the fresh ingredient does NOT give you these products: tomato -> not "tomato sauce"
+PRODUCT_FORMS = set("sauce paste puree ketchup powder salt soup mix".split())
+
+# Units we can compare quantities in (other units -> "quantity not verified")
+MEASURES = {"cup": "cup", "tablespoon": "tbsp", "tbsp": "tbsp", "tbs": "tbsp", "teaspoon": "tsp",
+            "tsp": "tsp", "ounce": "oz", "oz": "oz", "pound": "lb", "lb": "lb", "gram": "g",
+            "g": "g", "kg": "kg", "ml": "ml", "liter": "l", "l": "l", "clove": "clove",
+            "can": "can", "stick": "stick", "slice": "slice",
+            "lbs": "lb", "ozs": "oz", "kgs": "kg", "tbsps": "tbsp", "tsps": "tsp"}  # short plurals
 
 # Website text that is not a cooking step (in 8,387 Food Network recipes)
 BOILERPLATE = {"Watch how to make this recipe."}

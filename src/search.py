@@ -10,14 +10,14 @@ import re
 import pandas as pd
 from rank_bm25 import BM25Okapi
 
-from src.normalize import check_group, matches, singular
+from src.normalize import check_group, matches, name_status, singular
 
 
 def tokens(text):
     return [singular(w) for w in re.findall(r"[a-z]+", text.lower())]
 
 
-def restriction_status(names, groups):
+def restriction_status(names, title, groups):
     """('contains' | 'uncertain' | 'ok', flags) for one recipe across groups like ['dairy']."""
     flags = []
     for group in groups:
@@ -26,6 +26,9 @@ def restriction_status(names, groups):
             return "contains", []
         if status == "uncertain":
             flags.append(f"{group}? {', '.join(evidence)}")
+        elif name_status(title.lower(), group) == "contains":
+            # e.g. "Penne Pasta in Broth" whose ingredient list forgot the penne
+            flags.append(f"{group}? title mentions it, ingredient list doesn't")
     return ("uncertain" if flags else "ok"), flags
 
 
@@ -46,8 +49,9 @@ class RecipeSearch:
         if max_steps is not None:
             keep &= df["n_steps"] <= max_steps
         df = df[keep]
-        checks = df["ingredients_norm"].apply(lambda ns: restriction_status(ns, exclude_groups))
-        df = df.assign(status=checks.str[0], flags=checks.str[1])
+        checks = [restriction_status(ns, title, exclude_groups)
+                  for ns, title in zip(df["ingredients_norm"], df["title"])]
+        df = df.assign(status=[c[0] for c in checks], flags=[c[1] for c in checks])
         return df[df["status"] == "ok"], df[df["status"] == "uncertain"]
 
     def rank(self, df, query):
