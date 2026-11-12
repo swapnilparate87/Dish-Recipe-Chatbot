@@ -29,6 +29,15 @@ CASES = [
     ("what is the average number of ingredients in gluten-free recipes?", "none",
      dict(task="stats", stat="ingredient_count", exclude_groups=["gluten"])),
     ("How many calories does it have?", PENNE, dict(task="unsupported")),
+    # Task 3
+    ("Take this banana bread recipe and remove eggs. Use only ingredients that appear in the dataset. What "
+     "replacements have evidence from related baked recipes, and how might the texture change?", "none",
+     dict(task="substitute", replace=["egg"])),
+    ("Replace cream in this pasta recipe without dairy. Prefer examples from recipes already in the database.",
+     "none; current recipe: Pepperoni Penne", dict(task="substitute", replace=["cream"], exclude_groups=["dairy"])),
+    ("Use yogurt instead", "none; current recipe: Banana Bread", dict(task="substitute", use="yogurt")),
+    ("Make it dairy-free", "none; current recipe: Pepperoni Penne", dict(task="substitute", exclude_groups=["dairy"])),
+    ("Find a penne recipe with heavy cream", "none", dict(task="search", query="penne", include=["heavy cream"])),
 ]
 
 

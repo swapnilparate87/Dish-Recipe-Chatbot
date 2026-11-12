@@ -133,3 +133,42 @@ MEASURES = {"cup": "cup", "tablespoon": "tbsp", "tbsp": "tbsp", "tbs": "tbsp", "
 
 # Website text that is not a cooking step (in 8,387 Food Network recipes)
 BOILERPLATE = {"Watch how to make this recipe."}
+
+# Task 3 substitution --------------------------------------------------------------------
+# CANDIDATE substitutes per ingredient, with the ingredient's role and a usual amount.
+# This is general cooking knowledge (labeled as such in answers). The DATASET supplies the
+# evidence: how often similar recipes without the ingredient use each candidate.
+SUBSTITUTES = {
+    "egg": {"role": "binding, moisture and some lift in baking",
+            "options": {"applesauce": "1/4 cup per egg", "banana": "1/4 cup mashed per egg",
+                        "yogurt": "1/4 cup per egg", "buttermilk": "1/4 cup per egg",
+                        "flaxseed": "1 tbsp ground + 3 tbsp water per egg",
+                        "tofu": "1/4 cup silken, blended, per egg",
+                        "vegetable oil": "3 tbsp per egg (moisture only, no binding)"}},
+    "cream": {"role": "richness, body and thickening of sauces",
+              "options": {"coconut milk": "same amount (full-fat)", "milk": "same amount + 1 tbsp butter per cup",
+                          "chicken broth": "same amount, reduce longer (lighter sauce)",
+                          "cream cheese": "half the amount, whisked in", "olive oil": "2-3 tbsp + starchy pasta water",
+                          "white bean": "1 cup pureed per cup of cream", "cashew": "1 cup soaked + blended per cup"}},
+    "butter": {"role": "fat, flavor and tenderness",
+               "options": {"vegetable oil": "3/4 of the amount", "olive oil": "3/4 of the amount",
+                           "coconut oil": "same amount", "margarine": "same amount",
+                           "shortening": "same amount", "applesauce": "half the amount (baking only)"}},
+    "milk": {"role": "liquid, mild richness",
+             "options": {"almond milk": "same amount", "soy milk": "same amount", "oat milk": "same amount",
+                         "coconut milk": "same amount", "rice milk": "same amount", "water": "same amount (less rich)"}},
+    "sour cream": {"role": "tang, moisture, creaminess",
+                   "options": {"yogurt": "same amount", "cream cheese": "same amount, thinned",
+                               "coconut cream": "same amount + squeeze of lemon", "mayonnaise": "same amount"}},
+    "flour": {"role": "structure (gluten) or thickening",
+              "options": {"rice flour": "same amount", "almond flour": "same amount (denser)",
+                          "oat flour": "1 1/3 x the amount", "cornstarch": "half the amount (thickening only)",
+                          "buckwheat flour": "same amount"}},
+}
+
+# Extra ingredients a conversion above needs ("milk: + 1 tbsp butter per cup"). The rewrite may
+# add these (water is a pantry staple, so it needs no entry), and they must pass the restrictions too.
+EXTRAS = {"milk": ["butter"], "coconut cream": ["lemon"]}
+
+# In instruction TEXT, the word used as a verb, not the ingredient: "cream the butter and sugar"
+VERB_USES = {"cream": r"cream(?=\s+(?:the|together|butter|shortening|margarine)\b)"}

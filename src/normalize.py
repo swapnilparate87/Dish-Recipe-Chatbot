@@ -1,4 +1,4 @@
-"""Ingredient normalization, ingredient matching and step counting.
+"""Ingredient normalization, matching, restriction groups and step counting.
 
 "2 sweet onions (such as Vidalia), finely chopped"  ->  ("sweet onion",)
 "Kosher salt and freshly ground black pepper"       ->  ("salt", "black pepper")
@@ -10,20 +10,18 @@ from functools import lru_cache
 from src.rules import (ALIASES, BOILERPLATE, DERIVED, DESCRIPTORS, FREE_OF, GROUPS, KEEP_TOGETHER,
                        NOT_A, NOT_PLURAL, UNITS)
 
-FREE_WORDS = sorted({w for ws in FREE_OF.values() for w in ws}, key=len, reverse=True)
+FREE_WORDS = "|".join(sorted({w for ws in FREE_OF.values() for w in ws}, key=len, reverse=True))
+PLURALS = [("leaves", "leaf"), ("ies", "y"), ("oes", "o"), ("ches", "ch"), ("shes", "sh"),
+           ("xes", "x"), ("sses", "ss"), ("s", "")]
 
 
 def singular(word):
     """onions -> onion, tomatoes -> tomato, berries -> berry, leaves -> leaf"""
-    if word in NOT_PLURAL or len(word) <= 3:
+    if word in NOT_PLURAL or len(word) <= 3 or word.endswith("ss"):
         return word
     if word == "halves":
         return "half"
-    for end, new in [("leaves", "leaf"), ("ies", "y"), ("oes", "o"), ("ches", "ch"),
-                     ("shes", "sh"), ("xes", "x"), ("sses", "ss"), ("s", "")]:
-        if word.endswith(end) and not word.endswith("ss"):
-            return word[: -len(end)] + new
-    return word
+    return next((word[: -len(end)] + new for end, new in PLURALS if word.endswith(end)), word)
 
 
 def clean_words(text):
@@ -32,10 +30,8 @@ def clean_words(text):
     for w in map(singular, text.split()):
         is_spice = w == "clove" and prev in ("ground", "whole")  # ground cloves, not garlic
         prev = w
-        if not is_spice and (w in UNITS or w in DESCRIPTORS
-                             or all(p in DESCRIPTORS for p in w.split("-"))):
-            continue
-        words.append(w)
+        if is_spice or not (w in UNITS or w in DESCRIPTORS or all(p in DESCRIPTORS for p in w.split("-"))):
+            words.append(w)
     return " ".join(words).strip()
 
 
@@ -43,15 +39,14 @@ def clean_words(text):
 def normalize_ingredient(text):
     """Raw ingredient string -> tuple of canonical names (usually 1, sometimes 2)."""
     t = text.lower().strip()
-    if t.endswith(":"):                                  # header like "For the sauce:"
+    if t.endswith(":"):                                   # header like "For the sauce:"
         return ()
     t = re.sub(r"\(.*?\)", " ", t).replace("half and half", "half-and-half")
-    # "dairy free cheese" -> "dairy-free cheese" ("free" alone is dropped as a descriptor)
-    t = re.sub(rf"\b({'|'.join(FREE_WORDS)})\s+free\b", r"\1-free", t)
+    t = re.sub(rf"\b({FREE_WORDS})\s+free\b", r"\1-free", t)  # "dairy free" -> "dairy-free"
     name = ""
-    for part in re.split(r"[,;]", t):                    # name is usually before the comma,
-        part = re.sub(r"[^a-z\s-]", " ", part)           # ...but not always: use first
-        part = re.sub(r"(?<!\w)-|-(?!\w)", " ", part)    # part that survives cleaning
+    for part in re.split(r"[,;]", t):  # name usually comes before the comma, but not always:
+        part = re.sub(r"[^a-z\s-]", " ", part)            # use the first part that survives cleaning
+        part = re.sub(r"(?<!\w)-|-(?!\w)", " ", part)     # stray hyphens
         name = re.sub(r"^((and|or)(\s+|$))+|(\s+(and|or))+$", "", clean_words(part))  # stray and/or
         if name:
             break
@@ -59,8 +54,7 @@ def normalize_ingredient(text):
         return ()
     if name in KEEP_TOGETHER:
         return (name,)
-    parts = re.split(r" (?:and|or) ", name)              # "salt and black pepper" -> 2 names
-    return tuple(ALIASES.get(p, p) for p in parts if p)
+    return tuple(ALIASES.get(p, p) for p in re.split(r" (?:and|or) ", name) if p)  # "salt and pepper"
 
 
 def normalize_list(ingredients):
@@ -84,6 +78,11 @@ def matches(query, name, strict=False):
     return not (strict and DERIVED & set(name.split(q, 1)[1].split()))
 
 
+def has_any(names, terms, strict=False):
+    """Does any of a recipe's names match any of the terms?"""
+    return any(matches(t, n, strict) for t in terms for n in names)
+
+
 @lru_cache(maxsize=None)
 def group_regex(group, status):
     """All words of one list as ONE regex, longest first: r'\\b(sour cream|cream|...)\\b'"""
@@ -94,18 +93,14 @@ def group_regex(group, status):
 @lru_cache(maxsize=None)
 def name_status(name, group):
     """'contains', 'uncertain' or 'ok' for ONE canonical name in a group (e.g. 'dairy').
-    Each word found is re-checked with matches() (NOT_A exceptions) and the group's own
-    exceptions ("rice noodle" is not gluten)."""
+    Each word found is re-checked with matches() (NOT_A) and the group's own exceptions."""
     if re.search(rf"\b({'|'.join(FREE_OF[group])})[- ]free\b", name):  # "nut-free", "gluten free"
         return "ok"
     exceptions = GROUPS[group].get("exceptions", {})
-
-    def really(word):
-        return matches(word, name) and not any(has_phrase(x, name) for x in exceptions.get(word, []))
-
     for status in ("contains", "uncertain"):
-        if any(really(word) for word in group_regex(group, status).findall(name)):
-            return status
+        for word in group_regex(group, status).findall(name):
+            if matches(word, name) and not any(has_phrase(x, name) for x in exceptions.get(word, [])):
+                return status
     return "ok"
 
 
@@ -116,6 +111,19 @@ def check_group(names, group):
         if hits:
             return status, hits
     return "ok", []
+
+
+def group_flags(names, groups, title=None):
+    """Every restriction group a recipe breaks or may break: [(group, 'contains'|'uncertain', evidence)].
+    With a title, a 'Penne Pasta ...' whose ingredient list forgot the penne is 'uncertain' for gluten."""
+    flags = []
+    for g in groups:
+        status, evidence = check_group(names, g)
+        if status == "ok" and title and name_status(title.lower(), g) == "contains":
+            status, evidence = "uncertain", ["title mentions it, ingredient list doesn't"]
+        if status != "ok":
+            flags.append((g, status, evidence))
+    return flags
 
 
 def count_steps(text):
@@ -131,16 +139,12 @@ if __name__ == "__main__":
                  "1/4 cup (1/2 stick) butter", "2 garlic cloves, minced", "1 cup half-and-half",
                  "4 skinless, boneless chicken breast halves", "1/2 teaspoon ground cloves"]:
         print(f"{text!r:75} -> {normalize_ingredient(text)}")
-
-    print()
-    for text, expected in [
-        ("Mix flour and sugar. Bake 20 minutes.", 2),
-        ("Bake at 350 degrees F. until golden. Cool.", 2),   # lowercase after "F."
-        ("1. Heat the oil. Add shells.\n2. Stir well.", 3),  # "1." is not a step
-        ("Add 1.5 cups water. Boil!", 2),                    # decimal is not a split
-        ("Combine everything", 1),                           # no final period
-        ("Watch how to make this recipe. Mix well.", 1),     # boilerplate ignored
-        (";", 0),                                            # junk
-    ]:
+    for text, expected in [("Mix flour and sugar. Bake 20 minutes.", 2),
+                           ("Bake at 350 degrees F. until golden. Cool.", 2),   # lowercase after "F."
+                           ("1. Heat the oil. Add shells.\n2. Stir well.", 3),  # "1." is not a step
+                           ("Add 1.5 cups water. Boil!", 2),                    # decimal is not a split
+                           ("Combine everything", 1),                           # no final period
+                           ("Watch how to make this recipe. Mix well.", 1),     # boilerplate ignored
+                           (";", 0)]:                                           # junk
         got = count_steps(text)
         print("OK  " if got == expected else "FAIL", got, expected, repr(text))
