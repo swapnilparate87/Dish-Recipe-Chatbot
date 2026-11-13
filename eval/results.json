@@ -1,0 +1,1854 @@
+{
+  "dataset_size": 122917,
+  "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+  "startup_s": 19.9,
+  "one_response": {
+    "turn_p50_s": 2.428,
+    "turn_p95_s": 7.492,
+    "avg_llm_calls_per_turn": 1.22,
+    "avg_tokens_per_turn": 1390.1
+  },
+  "components": [
+    {
+      "component": "Normalization",
+      "cases": 15,
+      "passed": 15,
+      "accuracy": 1.0,
+      "case_p50_s": 0.0,
+      "case_p95_s": 0.0,
+      "total_s": 0.05,
+      "llm_calls": 0,
+      "llm_p50_s": null,
+      "llm_p95_s": null,
+      "ttft_p50_s": null,
+      "ttft_p95_s": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "failures": [],
+      "details": [
+        {
+          "case": "2 sweet onions (such as Vidalia), finely chopped",
+          "pass": true,
+          "expected": [
+            "sweet onion"
+          ],
+          "got": [
+            "sweet onion"
+          ]
+        },
+        {
+          "case": "Kosher salt and freshly ground black pepper",
+          "pass": true,
+          "expected": [
+            "salt",
+            "black pepper"
+          ],
+          "got": [
+            "salt",
+            "black pepper"
+          ]
+        },
+        {
+          "case": "3 cloves garlic, minced",
+          "pass": true,
+          "expected": [
+            "garlic"
+          ],
+          "got": [
+            "garlic"
+          ]
+        },
+        {
+          "case": "1 cup white sugar",
+          "pass": true,
+          "expected": [
+            "sugar"
+          ],
+          "got": [
+            "sugar"
+          ]
+        },
+        {
+          "case": "4 skinless, boneless chicken breasts",
+          "pass": true,
+          "expected": [
+            "chicken breast"
+          ],
+          "got": [
+            "chicken breast"
+          ]
+        },
+        {
+          "case": "1 (14.5 ounce) can diced tomatoes",
+          "pass": true,
+          "expected": [
+            "tomato"
+          ],
+          "got": [
+            "tomato"
+          ]
+        },
+        {
+          "case": "2 tablespoons peanut butter",
+          "pass": true,
+          "expected": [
+            "peanut butter"
+          ],
+          "got": [
+            "peanut butter"
+          ]
+        },
+        {
+          "case": "3 scallions, thinly sliced",
+          "pass": true,
+          "expected": [
+            "green onion"
+          ],
+          "got": [
+            "green onion"
+          ]
+        },
+        {
+          "case": "1 cup half-and-half",
+          "pass": true,
+          "expected": [
+            "half-and-half"
+          ],
+          "got": [
+            "half-and-half"
+          ]
+        },
+        {
+          "case": "2 large eggs, beaten",
+          "pass": true,
+          "expected": [
+            "egg"
+          ],
+          "got": [
+            "egg"
+          ]
+        },
+        {
+          "case": "1 cup chicken broth",
+          "pass": true,
+          "expected": [
+            "chicken broth"
+          ],
+          "got": [
+            "chicken broth"
+          ]
+        },
+        {
+          "case": "For the sauce:",
+          "pass": true,
+          "expected": [],
+          "got": []
+        },
+        {
+          "case": "1/4 cup fresh basil leaves",
+          "pass": true,
+          "expected": [
+            "basil"
+          ],
+          "got": [
+            "basil"
+          ]
+        },
+        {
+          "case": "2 teaspoons hot sauce",
+          "pass": true,
+          "expected": [
+            "hot sauce"
+          ],
+          "got": [
+            "hot sauce"
+          ]
+        },
+        {
+          "case": "1 1/2 cups milk",
+          "pass": true,
+          "expected": [
+            "milk"
+          ],
+          "got": [
+            "milk"
+          ]
+        }
+      ]
+    },
+    {
+      "component": "Ingredient matching",
+      "cases": 12,
+      "passed": 12,
+      "accuracy": 1.0,
+      "case_p50_s": 0.0,
+      "case_p95_s": 0.0,
+      "total_s": 0.0,
+      "llm_calls": 0,
+      "llm_p50_s": null,
+      "llm_p95_s": null,
+      "ttft_p50_s": null,
+      "ttft_p95_s": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "failures": [],
+      "details": [
+        {
+          "case": "garlic ~ garlic powder (strict)",
+          "pass": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "tomato ~ cherry tomato (strict)",
+          "pass": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "oil ~ olive oil (strict)",
+          "pass": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "flour ~ all-purpose flour (strict)",
+          "pass": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "butter ~ peanut butter (strict)",
+          "pass": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "egg ~ eggplant (strict)",
+          "pass": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "onion ~ green onion (strict)",
+          "pass": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "chicken ~ chicken broth (strict)",
+          "pass": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "chicken ~ chicken broth (broad)",
+          "pass": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "milk ~ coconut milk (strict)",
+          "pass": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "rice ~ rice vinegar (strict)",
+          "pass": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "cheese ~ cream cheese (strict)",
+          "pass": true,
+          "expected": true,
+          "got": true
+        }
+      ]
+    },
+    {
+      "component": "Restriction groups",
+      "cases": 18,
+      "passed": 17,
+      "accuracy": 0.944,
+      "unsafe_flagged_recall": 1.0,
+      "safe_false_alarm_rate": 0.125,
+      "case_p50_s": 0.0,
+      "case_p95_s": 0.001,
+      "total_s": 0.0,
+      "llm_calls": 0,
+      "llm_p50_s": null,
+      "llm_p95_s": null,
+      "ttft_p50_s": null,
+      "ttft_p95_s": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "failures": [
+        {
+          "case": "corn tortilla / gluten",
+          "pass": false,
+          "expected": [
+            "ok"
+          ],
+          "got": "uncertain"
+        }
+      ],
+      "details": [
+        {
+          "case": "coconut milk / dairy",
+          "pass": true,
+          "expected": [
+            "ok"
+          ],
+          "got": "ok"
+        },
+        {
+          "case": "peanut butter / dairy",
+          "pass": true,
+          "expected": [
+            "ok"
+          ],
+          "got": "ok"
+        },
+        {
+          "case": "egg / dairy",
+          "pass": true,
+          "expected": [
+            "ok"
+          ],
+          "got": "ok"
+        },
+        {
+          "case": "cream of tartar / dairy",
+          "pass": true,
+          "expected": [
+            "ok"
+          ],
+          "got": "ok"
+        },
+        {
+          "case": "butter / dairy",
+          "pass": true,
+          "expected": [
+            "contains"
+          ],
+          "got": "contains"
+        },
+        {
+          "case": "parmesan cheese / dairy",
+          "pass": true,
+          "expected": [
+            "contains"
+          ],
+          "got": "contains"
+        },
+        {
+          "case": "ghee / dairy",
+          "pass": true,
+          "expected": [
+            "contains"
+          ],
+          "got": "contains"
+        },
+        {
+          "case": "peanut butter cream frosting / dairy",
+          "pass": true,
+          "expected": [
+            "contains"
+          ],
+          "got": "contains"
+        },
+        {
+          "case": "margarine / dairy",
+          "pass": true,
+          "expected": [
+            "uncertain"
+          ],
+          "got": "uncertain"
+        },
+        {
+          "case": "whipped topping / dairy",
+          "pass": true,
+          "expected": [
+            "uncertain"
+          ],
+          "got": "uncertain"
+        },
+        {
+          "case": "almond / nuts",
+          "pass": true,
+          "expected": [
+            "contains"
+          ],
+          "got": "contains"
+        },
+        {
+          "case": "coconut pecan frosting / nuts",
+          "pass": true,
+          "expected": [
+            "contains"
+          ],
+          "got": "contains"
+        },
+        {
+          "case": "nutmeg / nuts",
+          "pass": true,
+          "expected": [
+            "ok"
+          ],
+          "got": "ok"
+        },
+        {
+          "case": "water chestnut / nuts",
+          "pass": true,
+          "expected": [
+            "ok"
+          ],
+          "got": "ok"
+        },
+        {
+          "case": "all-purpose flour / gluten",
+          "pass": true,
+          "expected": [
+            "contains"
+          ],
+          "got": "contains"
+        },
+        {
+          "case": "gluten-free pasta / gluten",
+          "pass": true,
+          "expected": [
+            "ok"
+          ],
+          "got": "ok"
+        },
+        {
+          "case": "soy sauce / gluten",
+          "pass": true,
+          "expected": [
+            "contains",
+            "uncertain"
+          ],
+          "got": "uncertain"
+        },
+        {
+          "case": "corn tortilla / gluten",
+          "pass": false,
+          "expected": [
+            "ok"
+          ],
+          "got": "uncertain"
+        }
+      ]
+    },
+    {
+      "component": "Step counting",
+      "cases": 12,
+      "passed": 11,
+      "accuracy": 0.917,
+      "case_p50_s": 0.0,
+      "case_p95_s": 0.0,
+      "total_s": 0.0,
+      "llm_calls": 0,
+      "llm_p50_s": null,
+      "llm_p95_s": null,
+      "ttft_p50_s": null,
+      "ttft_p95_s": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "failures": [
+        {
+          "case": "Add 1 tsp. Salt and stir.",
+          "pass": false,
+          "expected": 1,
+          "got": 2
+        }
+      ],
+      "details": [
+        {
+          "case": "Preheat oven to 350 degrees F. Mix flour and sugar. Bake 30 ",
+          "pass": true,
+          "expected": 3,
+          "got": 3
+        },
+        {
+          "case": "Bake at 350 degrees F. until golden.",
+          "pass": true,
+          "expected": 1,
+          "got": 1
+        },
+        {
+          "case": "Add 1.5 cups water. Stir.",
+          "pass": true,
+          "expected": 2,
+          "got": 2
+        },
+        {
+          "case": "1. Heat the oil. 2. Add onions.",
+          "pass": true,
+          "expected": 2,
+          "got": 2
+        },
+        {
+          "case": "Mix everything together",
+          "pass": true,
+          "expected": 1,
+          "got": 1
+        },
+        {
+          "case": "Watch how to make this recipe. Boil water. Add pasta.",
+          "pass": true,
+          "expected": 2,
+          "got": 2
+        },
+        {
+          "case": "Combine the cheese and\ncornstarch. Toss.",
+          "pass": true,
+          "expected": 2,
+          "got": 2
+        },
+        {
+          "case": "Cook! Serve hot? Enjoy.",
+          "pass": true,
+          "expected": 3,
+          "got": 3
+        },
+        {
+          "case": "Heat oil in a pan.\nAdd garlic; cook 1 minute.\nServe.",
+          "pass": true,
+          "expected": 3,
+          "got": 3
+        },
+        {
+          "case": "Stir in the eggs, one at a time. Fold in flour. Bake for 25 ",
+          "pass": true,
+          "expected": 4,
+          "got": 4
+        },
+        {
+          "case": "Place in a 9x13 inch pan. Refrigerate overnight.",
+          "pass": true,
+          "expected": 2,
+          "got": 2
+        },
+        {
+          "case": "Add 1 tsp. Salt and stir.",
+          "pass": false,
+          "expected": 1,
+          "got": 2
+        }
+      ]
+    },
+    {
+      "component": "Retrieval (search)",
+      "cases": 14,
+      "passed": 12,
+      "accuracy": 0.857,
+      "precision_at_5": 0.923,
+      "mrr": 1.0,
+      "exact_title_hit_at_1": 1.0,
+      "constraint_satisfaction": 1.0,
+      "results_checked": 61,
+      "case_p50_s": 0.891,
+      "case_p95_s": 2.442,
+      "total_s": 28.13,
+      "llm_calls": 0,
+      "llm_p50_s": null,
+      "llm_p95_s": null,
+      "ttft_p50_s": null,
+      "ttft_p95_s": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "failures": [
+        {
+          "case": "{\"query\": \"pepperoni penne\"}",
+          "pass": false,
+          "precision_at_5": 0.4,
+          "rr": 1.0,
+          "exact_title_top1": true,
+          "total_matches": 354,
+          "violations": [],
+          "top": [
+            "Pepperoni Penne",
+            "Kellie's Simple Penne with Pepperoni and Cheese",
+            "Pepperoni Bread",
+            "Pepperoni Casserole",
+            "Pepperoni Burgers"
+          ]
+        },
+        {
+          "case": "{\"query\": \"penne pasta\", \"exclude_groups\": [\"dairy\"]}",
+          "pass": false,
+          "precision_at_5": 0.6,
+          "rr": 1.0,
+          "exact_title_top1": null,
+          "total_matches": 479,
+          "violations": [],
+          "top": [
+            "Penne Pasta with Spinach and Bacon",
+            "Penne Pasta with Cannellini Beans and Escarole",
+            "Scallops and Penne Pasta in a Saffron Broth",
+            "Penne with Eggplant",
+            "Penne All' Arrabbiata"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "case": "{\"query\": \"banana bread\"}",
+          "pass": true,
+          "precision_at_5": 1.0,
+          "rr": 1.0,
+          "exact_title_top1": true,
+          "total_matches": 3444,
+          "violations": [],
+          "top": [
+            "Banana Bread",
+            "Banana Bread",
+            "Banana Bread",
+            "Banana Bread",
+            "Banana Bread"
+          ]
+        },
+        {
+          "case": "{\"query\": \"pepperoni penne\"}",
+          "pass": false,
+          "precision_at_5": 0.4,
+          "rr": 1.0,
+          "exact_title_top1": true,
+          "total_matches": 354,
+          "violations": [],
+          "top": [
+            "Pepperoni Penne",
+            "Kellie's Simple Penne with Pepperoni and Cheese",
+            "Pepperoni Bread",
+            "Pepperoni Casserole",
+            "Pepperoni Burgers"
+          ]
+        },
+        {
+          "case": "{\"query\": \"chocolate chip cookies\"}",
+          "pass": true,
+          "precision_at_5": 1.0,
+          "rr": 1.0,
+          "exact_title_top1": true,
+          "total_matches": 7460,
+          "violations": [],
+          "top": [
+            "Chocolate Chip Cookies",
+            "Chocolate Chip Cookies",
+            "Chocolate Chip Cookies",
+            "Chocolate Chip Cookies",
+            "Chocolate Chip Cookies"
+          ]
+        },
+        {
+          "case": "{\"query\": \"beef stew\"}",
+          "pass": true,
+          "precision_at_5": 1.0,
+          "rr": 1.0,
+          "exact_title_top1": true,
+          "total_matches": 2900,
+          "violations": [],
+          "top": [
+            "Beef Stew",
+            "Beef Stew",
+            "Beef Stew",
+            "Beef Stew",
+            "Beef Stew"
+          ]
+        },
+        {
+          "case": "{\"query\": \"guacamole\"}",
+          "pass": true,
+          "precision_at_5": 1.0,
+          "rr": 1.0,
+          "exact_title_top1": true,
+          "total_matches": 244,
+          "violations": [],
+          "top": [
+            "Guacamole",
+            "Guacamole",
+            "Guacamole",
+            "Guacamole",
+            "Guacamole"
+          ]
+        },
+        {
+          "case": "{\"query\": \"macaroni and cheese\"}",
+          "pass": true,
+          "precision_at_5": 1.0,
+          "rr": 1.0,
+          "exact_title_top1": true,
+          "total_matches": 26791,
+          "violations": [],
+          "top": [
+            "Macaroni and Cheese",
+            "Macaroni and Cheese",
+            "Macaroni and Cheese",
+            "Macaroni and Cheese",
+            "Macaroni and Cheese"
+          ]
+        },
+        {
+          "case": "{\"query\": \"penne pasta\", \"exclude_groups\": [\"dairy\"]}",
+          "pass": false,
+          "precision_at_5": 0.6,
+          "rr": 1.0,
+          "exact_title_top1": null,
+          "total_matches": 479,
+          "violations": [],
+          "top": [
+            "Penne Pasta with Spinach and Bacon",
+            "Penne Pasta with Cannellini Beans and Escarole",
+            "Scallops and Penne Pasta in a Saffron Broth",
+            "Penne with Eggplant",
+            "Penne All' Arrabbiata"
+          ]
+        },
+        {
+          "case": "{\"query\": \"brownies\", \"exclude_groups\": [\"nuts\"]}",
+          "pass": true,
+          "precision_at_5": 1.0,
+          "rr": 1.0,
+          "exact_title_top1": true,
+          "total_matches": 221,
+          "violations": [],
+          "top": [
+            "Brownies",
+            "Brownies",
+            "Brownies",
+            "Best Brownies",
+            "MMMMM... Brownies"
+          ]
+        },
+        {
+          "case": "{\"query\": \"pancakes\", \"exclude_ingredients\": [\"egg\"]}",
+          "pass": true,
+          "precision_at_5": 1.0,
+          "rr": 1.0,
+          "exact_title_top1": null,
+          "total_matches": 109,
+          "violations": [],
+          "top": [
+            "Vegan Pancakes",
+            "Eggnog Pancakes",
+            "Pesto Pancakes",
+            "Orange Pancakes",
+            "Vegetable Pancake"
+          ]
+        },
+        {
+          "case": "{\"query\": \"tomato soup\", \"max_steps\": 4}",
+          "pass": true,
+          "precision_at_5": 1.0,
+          "rr": 1.0,
+          "exact_title_top1": null,
+          "total_matches": 594,
+          "violations": [],
+          "top": [
+            "Tomato Soup I",
+            "Tomato Barley Soup",
+            "Florentine Tomato Soup",
+            "Tomato Soup II",
+            "Spiced Tomato Soup"
+          ]
+        },
+        {
+          "case": "{\"query\": \"lasagna\", \"exclude_groups\": [\"gluten\"]}",
+          "pass": true,
+          "precision_at_5": 1.0,
+          "rr": 1.0,
+          "exact_title_top1": null,
+          "total_matches": 1,
+          "violations": [],
+          "top": [
+            "Eggplant and Portobello (Lasagnas) with Roasted Tomato Vinaigrette"
+          ]
+        },
+        {
+          "case": "{\"include\": [\"chicken\", \"rice\"]}",
+          "pass": true,
+          "precision_at_5": 1.0,
+          "rr": 1.0,
+          "exact_title_top1": null,
+          "total_matches": 1033,
+          "violations": [],
+          "top": [
+            "Chicken and Rice",
+            "Lucky and Rippy's Favorite Dog Food",
+            "Country Chicken and Rice Soup",
+            "Chock-Full-of-Veggies Chicken",
+            "Roast Koji Chicken"
+          ]
+        },
+        {
+          "case": "{\"include\": [\"garlic\"], \"exclude_groups\": [\"dairy\", \"gluten\"]}",
+          "pass": true,
+          "precision_at_5": 1.0,
+          "rr": 1.0,
+          "exact_title_top1": null,
+          "total_matches": 10805,
+          "violations": [],
+          "top": [
+            "Roasted Garlic",
+            "brussels sprouts",
+            "Easiest, Amazing Guacamole",
+            "Garlic Oil",
+            "Garlic Oil"
+          ]
+        },
+        {
+          "case": "{\"query\": \"penne pasta\", \"include\": [\"chocolate\"], \"max_steps\": 2}",
+          "pass": true,
+          "expected": "no match",
+          "got": 0
+        }
+      ]
+    },
+    {
+      "component": "Statistics",
+      "cases": 12,
+      "passed": 12,
+      "accuracy": 1.0,
+      "disclosure_complete": 1.0,
+      "naive_raw_text_count_garlic_onion": 20241,
+      "case_p50_s": 1.292,
+      "case_p95_s": 2.485,
+      "total_s": 41.88,
+      "llm_calls": 0,
+      "llm_p50_s": null,
+      "llm_p95_s": null,
+      "ttft_p50_s": null,
+      "ttft_p95_s": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "failures": [],
+      "details": [
+        {
+          "case": "count {\"include\": [\"garlic\", \"onion\"]}",
+          "pass": true,
+          "expected": {
+            "count": 18662,
+            "percent": 15.18
+          },
+          "got": {
+            "count": 18662,
+            "percent": 15.18
+          },
+          "recipes_analyzed": 18662,
+          "oracle_analyzed": 18662
+        },
+        {
+          "case": "count {\"include\": [\"chicken\"]}",
+          "pass": true,
+          "expected": {
+            "count": 10217,
+            "percent": 8.31
+          },
+          "got": {
+            "count": 10217,
+            "percent": 8.31
+          },
+          "recipes_analyzed": 10217,
+          "oracle_analyzed": 10217
+        },
+        {
+          "case": "count {\"exclude_groups\": [\"dairy\"]}",
+          "pass": true,
+          "expected": {
+            "count": 48754,
+            "percent": 39.66
+          },
+          "got": {
+            "count": 48754,
+            "percent": 39.66
+          },
+          "recipes_analyzed": 48754,
+          "oracle_analyzed": 48754
+        },
+        {
+          "case": "count {\"include\": [\"egg\"], \"max_steps\": 5}",
+          "pass": true,
+          "expected": {
+            "count": 1333,
+            "percent": 1.08
+          },
+          "got": {
+            "count": 1333,
+            "percent": 1.08
+          },
+          "recipes_analyzed": 1333,
+          "oracle_analyzed": 1333
+        },
+        {
+          "case": "count {\"include\": [\"saffron\", \"marshmallow\"]}",
+          "pass": true,
+          "expected": {
+            "count": 0,
+            "percent": 0.0
+          },
+          "got": {
+            "count": 0,
+            "percent": 0.0
+          },
+          "recipes_analyzed": 0,
+          "oracle_analyzed": 0
+        },
+        {
+          "case": "common {\"top\": 5}",
+          "pass": true,
+          "expected": [
+            [
+              "salt",
+              67860
+            ],
+            [
+              "black pepper",
+              42490
+            ],
+            [
+              "butter",
+              37327
+            ],
+            [
+              "garlic",
+              32068
+            ],
+            [
+              "olive oil",
+              31394
+            ]
+          ],
+          "got": [
+            [
+              "salt",
+              67860
+            ],
+            [
+              "black pepper",
+              42490
+            ],
+            [
+              "butter",
+              37327
+            ],
+            [
+              "garlic",
+              32068
+            ],
+            [
+              "olive oil",
+              31394
+            ]
+          ],
+          "recipes_analyzed": 122917,
+          "oracle_analyzed": 122917
+        },
+        {
+          "case": "common {\"top\": 5, \"exclude_groups\": [\"dairy\"]}",
+          "pass": true,
+          "expected": [
+            [
+              "salt",
+              25197
+            ],
+            [
+              "black pepper",
+              18044
+            ],
+            [
+              "garlic",
+              16219
+            ],
+            [
+              "olive oil",
+              15477
+            ],
+            [
+              "sugar",
+              9123
+            ]
+          ],
+          "got": [
+            [
+              "salt",
+              25197
+            ],
+            [
+              "black pepper",
+              18044
+            ],
+            [
+              "garlic",
+              16219
+            ],
+            [
+              "olive oil",
+              15477
+            ],
+            [
+              "sugar",
+              9123
+            ]
+          ],
+          "recipes_analyzed": 48754,
+          "oracle_analyzed": 48754
+        },
+        {
+          "case": "ingredient_count {}",
+          "pass": true,
+          "expected": {
+            "mean": 10.39,
+            "median": 9.0
+          },
+          "got": {
+            "mean": 10.39,
+            "median": 9.0
+          },
+          "recipes_analyzed": 122917,
+          "oracle_analyzed": 122917
+        },
+        {
+          "case": "ingredient_count {\"exclude_groups\": [\"gluten\"]}",
+          "pass": true,
+          "expected": {
+            "mean": 8.83,
+            "median": 8.0
+          },
+          "got": {
+            "mean": 8.83,
+            "median": 8.0
+          },
+          "recipes_analyzed": 60740,
+          "oracle_analyzed": 60740
+        },
+        {
+          "case": "ingredient_count {\"include\": [\"saffron\", \"marshmallow\", \"lobster\"]}",
+          "pass": true,
+          "expected": {
+            "mean": null,
+            "median": null
+          },
+          "got": {
+            "mean": null,
+            "median": null
+          },
+          "recipes_analyzed": 0,
+          "oracle_analyzed": 0
+        },
+        {
+          "case": "rank_steps {\"n\": 5, \"include\": [\"tomato\"]}",
+          "pass": true,
+          "expected": [
+            "ar:t2uUbIkPS5/4Zspoxpw8pfjr5XYUzbW",
+            "ar:fldTuwcDEVmNTCD6/bhJPqsBE8W79..",
+            "ar:bl5wNmvCOAjUiIqywj.Z7WUVqnnvaLi",
+            "fn:1HpNRMys9LWnNe0YXok6ak1Scg7hidW",
+            "ar:Y8.FC4f/DY2QnQ/N2AvUeN2QWpNDGAy"
+          ],
+          "got": [
+            "ar:t2uUbIkPS5/4Zspoxpw8pfjr5XYUzbW",
+            "ar:fldTuwcDEVmNTCD6/bhJPqsBE8W79..",
+            "ar:bl5wNmvCOAjUiIqywj.Z7WUVqnnvaLi",
+            "fn:1HpNRMys9LWnNe0YXok6ak1Scg7hidW",
+            "ar:Y8.FC4f/DY2QnQ/N2AvUeN2QWpNDGAy"
+          ],
+          "recipes_analyzed": 18377,
+          "oracle_analyzed": 18377
+        },
+        {
+          "case": "rank_steps {\"n\": 5, \"fewest\": false, \"include\": [\"chocolate\"]}",
+          "pass": true,
+          "expected": [
+            "epi:wUeErXrKq2JQ.UEgMEEobDhubqOGhmi",
+            "epi:HdesmXxKS5AZpPwviPnlLvCQE0/aE1S",
+            "epi:3c9wxesdciPQkg3MxZmxJJi/onCsGLq",
+            "epi:0ckErBhRcN1dxu3kwTa1fKZx1vrbsPu",
+            "epi:Ntn4OxDsI2UR3pF9YPaWQHLVSx.QIx2"
+          ],
+          "got": [
+            "epi:wUeErXrKq2JQ.UEgMEEobDhubqOGhmi",
+            "epi:HdesmXxKS5AZpPwviPnlLvCQE0/aE1S",
+            "epi:3c9wxesdciPQkg3MxZmxJJi/onCsGLq",
+            "epi:0ckErBhRcN1dxu3kwTa1fKZx1vrbsPu",
+            "epi:Ntn4OxDsI2UR3pF9YPaWQHLVSx.QIx2"
+          ],
+          "recipes_analyzed": 8162,
+          "oracle_analyzed": 8162
+        }
+      ]
+    },
+    {
+      "component": "Task 2 matching",
+      "cases": 10,
+      "passed": 10,
+      "accuracy": 1.0,
+      "constraint_satisfaction": 1.0,
+      "results_checked": 43,
+      "case_p50_s": 1.815,
+      "case_p95_s": 4.252,
+      "total_s": 19.15,
+      "llm_calls": 0,
+      "llm_p50_s": null,
+      "llm_p95_s": null,
+      "ttft_p50_s": null,
+      "ttft_p95_s": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "failures": [],
+      "details": [
+        {
+          "case": "{\"have\": [\"eggs\", \"onions\", \"tomatoes\", \"rice\"], \"exclude_ingredients\": [\"peanut\"], \"max_steps\": 6, \"prefer\": [\"most_used\", \"fewest_missing\"]}",
+          "pass": true,
+          "results": 5,
+          "eligible": 8919,
+          "problems": []
+        },
+        {
+          "case": "{\"have\": [\"onions\", \"tomatoes\", \"rice\"], \"exclude_ingredients\": [\"peanut\", \"egg\"], \"max_steps\": 6, \"prefer\": [\"most_used\", \"fewest_missing\"]}",
+          "pass": true,
+          "results": 5,
+          "eligible": 6530,
+          "problems": []
+        },
+        {
+          "case": "{\"have\": [\"4 eggs\", \"1 cup rice\", \"2 tomatoes\"], \"max_steps\": 6, \"n\": 3}",
+          "pass": true,
+          "results": 3,
+          "eligible": 5787,
+          "problems": []
+        },
+        {
+          "case": "{\"have\": [\"chicken\", \"garlic\", \"lemon\"], \"exclude_groups\": [\"dairy\"]}",
+          "pass": true,
+          "results": 5,
+          "eligible": 22353,
+          "problems": []
+        },
+        {
+          "case": "{\"have\": [\"pasta\", \"tomato\", \"basil\"], \"exclude_groups\": [\"gluten\"]}",
+          "pass": true,
+          "results": 5,
+          "eligible": 9527,
+          "problems": []
+        },
+        {
+          "case": "{\"have\": [\"flour\", \"sugar\", \"butter\", \"egg\"], \"prefer\": [\"fewest_steps\"]}",
+          "pass": true,
+          "results": 5,
+          "eligible": 74635,
+          "problems": []
+        },
+        {
+          "case": "{\"have\": [\"potato\", \"cheese\"], \"exclude_groups\": [\"nuts\"], \"max_steps\": 4}",
+          "pass": true,
+          "results": 5,
+          "eligible": 1404,
+          "problems": []
+        },
+        {
+          "case": "{\"have\": [\"tomato\", \"onion\"], \"max_steps\": 5}",
+          "pass": true,
+          "results": 5,
+          "eligible": 4513,
+          "problems": []
+        },
+        {
+          "case": "{\"have\": [\"rice\", \"egg\", \"soy sauce\", \"green onion\"], \"exclude_ingredients\": [\"garlic\"], \"max_steps\": 8}",
+          "pass": true,
+          "results": 5,
+          "eligible": 7604,
+          "problems": []
+        },
+        {
+          "case": "{\"have\": [\"saffron\", \"lobster\"], \"exclude_groups\": [\"dairy\"], \"max_steps\": 1, \"n\": 3}",
+          "pass": true,
+          "expected": "no match + labelled alternatives",
+          "got": "0 results, 3 alternatives"
+        }
+      ]
+    },
+    {
+      "component": "LLM parser",
+      "cases": 17,
+      "passed": 17,
+      "accuracy": 1.0,
+      "task_accuracy": 1.0,
+      "field_accuracy": 1.0,
+      "case_p50_s": 1.087,
+      "case_p95_s": 2.516,
+      "total_s": 23.7,
+      "llm_calls": 18,
+      "llm_p50_s": 1.08,
+      "llm_p95_s": 2.455,
+      "ttft_p50_s": 0.859,
+      "ttft_p95_s": 2.311,
+      "input_tokens": 21814,
+      "output_tokens": 461,
+      "failures": [],
+      "details": [
+        {
+          "case": "Find a penne pasta recipe",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "I cannot have dairy",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "How many recipes contain both garlic and onion? What percentage of the dataset is that?",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "Among recipes containing tomato, which five have the fewest instruction steps?",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "I have eggs, onions, tomatoes, and rice. Suggest five recipes using as many of these as possible, with no peanuts and at most six instruction steps. Prefer recipes that need the fewest additional ingredients.",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "What can I make with 3 eggs and 2 cups of rice?",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "I'd rather have fewer steps",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "Exclude eggs too",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "dairy is fine now",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "show me the third one",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "what is the average number of ingredients in gluten-free recipes?",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "How many calories does it have?",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "Take this banana bread recipe and remove eggs. Use only ingredients that appear in the dataset. What replacements have evidence from related baked recipes, and how might the texture change?",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "Replace cream in this pasta recipe without dairy. Prefer examples from recipes already in the database.",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "Use yogurt instead",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "Make it dairy-free",
+          "pass": true,
+          "wrong": {}
+        },
+        {
+          "case": "Find a penne recipe with heavy cream",
+          "pass": true,
+          "wrong": {}
+        }
+      ]
+    },
+    {
+      "component": "Task 3 substitution",
+      "cases": 10,
+      "passed": 8,
+      "accuracy": 0.8,
+      "llm_rewrite_acceptance": 0.75,
+      "citation_validity": 1.0,
+      "citations_checked": 19,
+      "case_p50_s": 4.917,
+      "case_p95_s": 7.233,
+      "total_s": 43.15,
+      "llm_calls": 10,
+      "llm_p50_s": 3.52,
+      "llm_p95_s": 4.641,
+      "ttft_p50_s": 0.876,
+      "ttft_p95_s": 1.559,
+      "input_tokens": 4787,
+      "output_tokens": 3205,
+      "failures": [
+        {
+          "case": "Brownies: replace ['flour'] {\"exclude_groups\": [\"gluten\"]}",
+          "pass": false,
+          "problems": [
+            "lines not from the recipe or the substitute: ['- 2 sticks (1 cup) unsalted butter', '- 8 ounces fine-quality bittersweet chocolate (not unsweetened), coarsely chopped', '- 5 ounces walnut pieces, coarsely chopped (1 1/2 cups)', '- 2 cups sugar', '- 4 large eggs', '- 2 teaspoons vanilla', '- 1/2 teaspoon salt', '- 1/2 teaspoon baking powder']"
+          ],
+          "recipe": "Brownies [epi:r4k4RCNU4cXlb6ip/ep4wMCAe5x3Nxq]",
+          "chosen": "cornstarch",
+          "strength": "indirect",
+          "llm_rewrite_accepted": true,
+          "still_contains": {},
+          "effects": 3
+        },
+        {
+          "case": "Spinach Dip: replace ['sour cream'] {\"exclude_groups\": [\"dairy\"]}",
+          "pass": false,
+          "problems": [
+            "lines not from the recipe or the substitute: ['- 1 large clove garlic', '- 1/2 cup chopped scallions (white portion only)', '- One 10-ounce package frozen chopped spinach, thawed and drained well', '- 1/2 to 1 cup mayonnaise', '- 1 teaspoon chopped fresh thyme leaves or 1/2 teaspoon dried thyme leaves', '- 1 teaspoon Worcestershire sauce', '- 1 dash hot pepper sauce or more to taste', '- 1/2 teaspoon salt', '- 1/4 teaspoon freshly ground white pepper', '- 1 round loaf crusty bread (country white, pumpernickel, etc.)', '- Paprika']"
+          ],
+          "recipe": "Spinach Dip [fn:z3ZUmF/TatF55IYEtBH4PetEVoF21ta]",
+          "chosen": "coconut cream",
+          "strength": "none",
+          "llm_rewrite_accepted": true,
+          "still_contains": {},
+          "effects": 4
+        }
+      ],
+      "details": [
+        {
+          "case": "Banana Bread: replace ['egg'] {}",
+          "pass": true,
+          "problems": [],
+          "recipe": "Banana Bread [ar:BoBTO3QUO3Ci.0kayPs8.CfDU5oEXuu]",
+          "chosen": "yogurt",
+          "strength": "strong",
+          "llm_rewrite_accepted": true,
+          "still_contains": {},
+          "effects": 4
+        },
+        {
+          "case": "Banana Bread: replace ['egg'] {\"use\": \"flaxseed\"}",
+          "pass": true,
+          "problems": [],
+          "recipe": "Banana Bread [ar:BoBTO3QUO3Ci.0kayPs8.CfDU5oEXuu]",
+          "chosen": "flaxseed",
+          "strength": "weak",
+          "llm_rewrite_accepted": false,
+          "still_contains": {},
+          "effects": 0
+        },
+        {
+          "case": "Banana Bread: replace ['egg'] {\"exclude_groups\": [\"dairy\"]}",
+          "pass": true,
+          "problems": [],
+          "recipe": "Banana Bread [ar:BoBTO3QUO3Ci.0kayPs8.CfDU5oEXuu]",
+          "chosen": "flaxseed",
+          "strength": "weak",
+          "llm_rewrite_accepted": false,
+          "still_contains": {
+            "dairy": [
+              "butter"
+            ]
+          },
+          "effects": 0
+        },
+        {
+          "case": "Pepperoni Penne: replace ['cream'] {\"exclude_groups\": [\"dairy\"]}",
+          "pass": true,
+          "problems": [],
+          "recipe": "Pepperoni Penne [ar:mvenq6TC20.ln4I3ub7aVIoPJzX/Udi]",
+          "chosen": "chicken broth",
+          "strength": "strong",
+          "llm_rewrite_accepted": true,
+          "still_contains": {
+            "dairy": [
+              "parmesan"
+            ]
+          },
+          "effects": 4
+        },
+        {
+          "case": "Chocolate Chip Cookies: replace ['butter'] {}",
+          "pass": true,
+          "problems": [],
+          "recipe": "Chocolate Chip Cookies [epi:p4m5F2dP4edmedzCdyXmNu5sqmMOKAe]",
+          "chosen": "shortening",
+          "strength": "strong",
+          "llm_rewrite_accepted": true,
+          "still_contains": {},
+          "effects": 4
+        },
+        {
+          "case": "Pancakes: replace ['milk'] {\"exclude_groups\": [\"dairy\"]}",
+          "pass": true,
+          "problems": [],
+          "recipe": "Pancakes [ar:PNtSV40YPColz8jdUQLNHRYE3h13W92]",
+          "chosen": "water",
+          "strength": "strong",
+          "llm_rewrite_accepted": true,
+          "still_contains": {},
+          "effects": 3
+        },
+        {
+          "case": "Brownies: replace ['flour'] {\"exclude_groups\": [\"gluten\"]}",
+          "pass": false,
+          "problems": [
+            "lines not from the recipe or the substitute: ['- 2 sticks (1 cup) unsalted butter', '- 8 ounces fine-quality bittersweet chocolate (not unsweetened), coarsely chopped', '- 5 ounces walnut pieces, coarsely chopped (1 1/2 cups)', '- 2 cups sugar', '- 4 large eggs', '- 2 teaspoons vanilla', '- 1/2 teaspoon salt', '- 1/2 teaspoon baking powder']"
+          ],
+          "recipe": "Brownies [epi:r4k4RCNU4cXlb6ip/ep4wMCAe5x3Nxq]",
+          "chosen": "cornstarch",
+          "strength": "indirect",
+          "llm_rewrite_accepted": true,
+          "still_contains": {},
+          "effects": 3
+        },
+        {
+          "case": "Spinach Dip: replace ['sour cream'] {\"exclude_groups\": [\"dairy\"]}",
+          "pass": false,
+          "problems": [
+            "lines not from the recipe or the substitute: ['- 1 large clove garlic', '- 1/2 cup chopped scallions (white portion only)', '- One 10-ounce package frozen chopped spinach, thawed and drained well', '- 1/2 to 1 cup mayonnaise', '- 1 teaspoon chopped fresh thyme leaves or 1/2 teaspoon dried thyme leaves', '- 1 teaspoon Worcestershire sauce', '- 1 dash hot pepper sauce or more to taste', '- 1/2 teaspoon salt', '- 1/4 teaspoon freshly ground white pepper', '- 1 round loaf crusty bread (country white, pumpernickel, etc.)', '- Paprika']"
+          ],
+          "recipe": "Spinach Dip [fn:z3ZUmF/TatF55IYEtBH4PetEVoF21ta]",
+          "chosen": "coconut cream",
+          "strength": "none",
+          "llm_rewrite_accepted": true,
+          "still_contains": {},
+          "effects": 4
+        },
+        {
+          "case": "Guacamole: replace ['egg'] {}",
+          "pass": true,
+          "problems": [],
+          "recipe": "Guacamole [ar:99PNE9tq7cmoGh5LvVtzOhXxYiw9qnC]"
+        },
+        {
+          "case": "Paella: replace ['saffron'] {}",
+          "pass": true,
+          "problems": [],
+          "recipe": "Paella [fn:PEAbr2o9HWQh/sjFErf1oBgUGZ/tkxu]"
+        }
+      ]
+    },
+    {
+      "component": "Task 3 quality (judge: nemotron-3.5-super-vl-120b-a12b)",
+      "cases": 8,
+      "passed": 4,
+      "accuracy": 0.5,
+      "avg_instructions": 2.88,
+      "avg_amount": 4.38,
+      "avg_effects": 3.88,
+      "case_p50_s": 1.536,
+      "case_p95_s": 2.282,
+      "total_s": 13.11,
+      "llm_calls": 8,
+      "llm_p50_s": 1.536,
+      "llm_p95_s": 2.282,
+      "ttft_p50_s": 1.013,
+      "ttft_p95_s": 1.279,
+      "input_tokens": 5469,
+      "output_tokens": 412,
+      "failures": [
+        {
+          "case": "Banana Bread: egg -> yogurt",
+          "pass": false,
+          "instructions": 2,
+          "amount": 4,
+          "effects": 4,
+          "comment": "The amount is reasonable, but the instructions fail to address the loss of binding and leavening properties when replacing eggs with yogurt."
+        },
+        {
+          "case": "Banana Bread: egg -> flaxseed",
+          "pass": false,
+          "instructions": 1,
+          "amount": 5,
+          "effects": 4,
+          "comment": "The instructions fail to mention preparing the flax egg and contain a grammatical error, though the substitution ratio and predicted textural changes are sound."
+        },
+        {
+          "case": "Banana Bread: egg -> flaxseed",
+          "pass": false,
+          "instructions": 1,
+          "amount": 5,
+          "effects": 4,
+          "comment": "The instructions fail to mention preparing the flax egg and contain a grammatical error, though the substitution ratio is correct and the effects are plausible."
+        },
+        {
+          "case": "Brownies: flour -> cornstarch",
+          "pass": false,
+          "instructions": 2,
+          "amount": 2,
+          "effects": 2,
+          "comment": "Replacing flour with cornstarch removes essential gluten structure, likely resulting in a gummy or crumbly texture rather than a proper brownie."
+        }
+      ],
+      "details": [
+        {
+          "case": "Banana Bread: egg -> yogurt",
+          "pass": false,
+          "instructions": 2,
+          "amount": 4,
+          "effects": 4,
+          "comment": "The amount is reasonable, but the instructions fail to address the loss of binding and leavening properties when replacing eggs with yogurt."
+        },
+        {
+          "case": "Banana Bread: egg -> flaxseed",
+          "pass": false,
+          "instructions": 1,
+          "amount": 5,
+          "effects": 4,
+          "comment": "The instructions fail to mention preparing the flax egg and contain a grammatical error, though the substitution ratio and predicted textural changes are sound."
+        },
+        {
+          "case": "Banana Bread: egg -> flaxseed",
+          "pass": false,
+          "instructions": 1,
+          "amount": 5,
+          "effects": 4,
+          "comment": "The instructions fail to mention preparing the flax egg and contain a grammatical error, though the substitution ratio is correct and the effects are plausible."
+        },
+        {
+          "case": "Pepperoni Penne: cream -> chicken broth",
+          "pass": true,
+          "instructions": 4,
+          "amount": 5,
+          "effects": 4,
+          "comment": "The adaptation is coherent and the amount is correct, though the extended reduction time is necessary to compensate for the lack of cream."
+        },
+        {
+          "case": "Chocolate Chip Cookies: butter -> shortening",
+          "pass": true,
+          "instructions": 5,
+          "amount": 5,
+          "effects": 4,
+          "comment": "The substitution is handled correctly with a 1:1 ratio and accurate predictions regarding flavor and texture changes."
+        },
+        {
+          "case": "Pancakes: milk -> water",
+          "pass": true,
+          "instructions": 5,
+          "amount": 5,
+          "effects": 5,
+          "comment": "The substitution is logically sound, with accurate measurements and realistic predictions regarding flavor and texture changes."
+        },
+        {
+          "case": "Brownies: flour -> cornstarch",
+          "pass": false,
+          "instructions": 2,
+          "amount": 2,
+          "effects": 2,
+          "comment": "Replacing flour with cornstarch removes essential gluten structure, likely resulting in a gummy or crumbly texture rather than a proper brownie."
+        },
+        {
+          "case": "Spinach Dip: sour cream -> coconut cream",
+          "pass": true,
+          "instructions": 3,
+          "amount": 4,
+          "effects": 4,
+          "comment": "The instructions are coherent but fail to address coconut cream's tendency to separate when blended or its need for chilling to thicken properly."
+        }
+      ]
+    },
+    {
+      "component": "End-to-end conversations",
+      "cases": 18,
+      "passed": 16,
+      "accuracy": 0.889,
+      "conversations": 6,
+      "conversations_fully_passed": 4,
+      "turn_p50_s": 2.428,
+      "turn_p95_s": 7.492,
+      "avg_llm_calls_per_turn": 1.22,
+      "avg_tokens_per_turn": 1390.1,
+      "case_p50_s": 2.428,
+      "case_p95_s": 7.492,
+      "total_s": 57.69,
+      "llm_calls": 22,
+      "llm_p50_s": 1.082,
+      "llm_p95_s": 4.028,
+      "ttft_p50_s": 0.914,
+      "ttft_p95_s": 1.957,
+      "input_tokens": 23443,
+      "output_tokens": 1578,
+      "failures": [
+        {
+          "case": "Task 2: matching + follow-ups | I'd rather have fewer steps",
+          "pass": false,
+          "check": "steps_first",
+          "latency_s": 2.72,
+          "tokens": 1226,
+          "answer": "You have: onion, tomato, rice | hard constraints: without peanut; without egg; at most 4 steps\nRanking: uses more of your ingredients -> needs fewer extra ingredients -> has fewer steps -> title. Pantry staples (salt, black pepper, water) are assumed.\n2811 eligible recipes use at least one of your ingredients. Top 5:\n1. Tracy's Tomato Artichoke Rice Salad  [ar:q1pHj7jmtuLgyGutgL.WJkSPQuIBgWe]  3 s"
+        },
+        {
+          "case": "Task 3: weak evidence | Remove the eggs from this recipe",
+          "pass": false,
+          "check": "adapted_no_egg",
+          "latency_s": 7.35,
+          "tokens": 1914,
+          "answer": "Adapting: Banana Bread [ar:BoBTO3QUO3Ci.0kayPs8.CfDU5oEXuu]\nReplacing: 2 eggs, beaten (role: binding, moisture and some lift in baking)\nLocal evidence: 719 similar recipes (587 with egg, 132 without). Candidates (amounts are cooking rules of thumb, not data):\n- yogurt (1/4 cup per egg): direct evidence: several similar recipes without it use this. 9 similar egg-free recipes use it (7% vs 2% of ver"
+        }
+      ],
+      "details": [
+        {
+          "case": "Task 1: search + restriction follow-up | Find a penne pasta recipe",
+          "pass": true,
+          "check": "search_results",
+          "latency_s": 7.1,
+          "tokens": 1217,
+          "answer": "Active filters: dish \"penne pasta\"\n1845 matching recipes, ranked by exact title, then BM25 title relevance:\n1. Creamy Penne Pasta  [ar:nvQzTEX.J7/2LmKnF8KjsR6aCqNHGxO]  5 steps\n2. Drunken Penne Pasta  [fn:6Vi.RvXGd.fVPiUz10UWjlpt.bzgnXW]  8 steps\n3. Penne Pasta Primavera  [fn:w2RTSdugzUTK9TT2jYcpQ2xNH8/ms6y]  13 steps\n4. Portobello Penne Pasta Casserole  [ar:jfbKxlKg793qYyjjiDwAPlu.AOZgDZO]  13 st"
+        },
+        {
+          "case": "Task 1: search + restriction follow-up | I cannot have dairy",
+          "pass": true,
+          "check": "dairy_free_results",
+          "latency_s": 2.95,
+          "tokens": 1229,
+          "answer": "Active filters: dish \"penne pasta\"; no dairy\n479 matching recipes, ranked by exact title, then BM25 title relevance:\n1. Penne Pasta with Spinach and Bacon  [ar:23to8XzUux0FF.g5ZFsqnxvhByMzfJ.]  8 steps\n   evidence, full ingredient list: 1 (12 ounce) package penne pasta; 2 tablespoons olive oil, divided; 6 slices bacon, chopped; 2 tablespoons minced garlic; 1 (14.5 ounce) can diced tomatoes; 1 bunc"
+        },
+        {
+          "case": "Task 1: search + restriction follow-up | Show me the second one",
+          "pass": true,
+          "check": "shows_second",
+          "latency_s": 0.95,
+          "tokens": 1224,
+          "answer": "Penne Pasta with Cannellini Beans and Escarole  [ar:zwRAInNlhnKD1jMf/HOm5a9oKhjC8Om]\n\nIngredients:\n- 1 (16 ounce) package dry penne pasta\n- 1 head escarole, chopped\n- 1 (15.5 ounce) can cannellini beans, with liquid\n- 1 (14.5 ounce) can diced tomatoes with garlic and onion, drained\n- salt and ground black pepper to taste\n\nInstructions:\nBring a large pot of lightly salted water to a boil, and cook "
+        },
+        {
+          "case": "Task 1: aggregate statistics | How many recipes contain both garlic and onion? What percentage of the",
+          "pass": true,
+          "check": "garlic_onion",
+          "latency_s": 2.16,
+          "tokens": 1238,
+          "answer": "18662 recipes out of 122917 = 15.18% of the dataset.\n'garlic' counted as: garlic, garlic powder, garlic salt, granulated garlic, roasted garlic, ...\n'onion' counted as: onion, red onion, yellow onion, onion powder, white onion, ...\nIngredient names are normalized (quantities, units and preparation words removed, plurals made singular). An ingredient matches names that contain it as a whole word (g"
+        },
+        {
+          "case": "Task 1: aggregate statistics | Among recipes containing tomato, which five have the fewest instructio",
+          "pass": true,
+          "check": "tomato_steps",
+          "latency_s": 1.73,
+          "tokens": 1244,
+          "answer": "1. 'Cherry' Caprese Salad  [ar:t2uUbIkPS5/4Zspoxpw8pfjr5XYUzbW]  1 steps\n2. 'Who Needs Lettuce?' Salad  [ar:fldTuwcDEVmNTCD6/bhJPqsBE8W79..]  1 steps\n3. 6 Can Chicken Tortilla Soup  [ar:bl5wNmvCOAjUiIqywj.Z7WUVqnnvaLi]  1 steps\n4. Antipasti Platter  [fn:1HpNRMys9LWnNe0YXok6ak1Scg7hidW]  1 steps\n5. Apricot Salsa  [ar:Y8.FC4f/DY2QnQ/N2AvUeN2QWpNDGAy]  1 steps\n(76 recipes have the same step count as "
+        },
+        {
+          "case": "Task 1: aggregate statistics | What is the average number of ingredients in gluten-free recipes?",
+          "pass": true,
+          "check": "gluten_free_avg",
+          "latency_s": 2.7,
+          "tokens": 1231,
+          "answer": "Mean 8.83 ingredients, median 8.0 (min 1, max 56).\nFilters: no gluten | recipes analyzed: 60740 (+10952 uncertain excluded) | calculation: ingredient lines per recipe (original list, ADVERTISEMENT removed)"
+        },
+        {
+          "case": "Task 2: matching + follow-ups | I have eggs, onions, tomatoes, and rice. Suggest five recipes using as",
+          "pass": true,
+          "check": "pdf_match",
+          "latency_s": 4.66,
+          "tokens": 1312,
+          "answer": "You have: egg, onion, tomato, rice | hard constraints: without peanut; at most 6 steps\nRanking: uses more of your ingredients -> needs fewer extra ingredients -> has fewer steps -> title. Pantry staples (salt, black pepper, water) are assumed.\n8919 eligible recipes use at least one of your ingredients. Top 5:\n1. Imitation Meatloaf  [ar:q3kO3yCalJEVIp74kLkkcxHp6izs7zi]  6 steps\n   uses 4/4: egg, on"
+        },
+        {
+          "case": "Task 2: matching + follow-ups | Exclude eggs too",
+          "pass": true,
+          "check": "no_eggs",
+          "latency_s": 2.82,
+          "tokens": 1223,
+          "answer": "You have: onion, tomato, rice | hard constraints: without peanut; without egg; at most 6 steps\nRanking: uses more of your ingredients -> needs fewer extra ingredients -> has fewer steps -> title. Pantry staples (salt, black pepper, water) are assumed.\n6530 eligible recipes use at least one of your ingredients. Top 5:\n1. Easy Red Rice  [ar:HEANjerxzzD5N/d0QMF7jOsTplW.f1K]  6 steps\n   uses 3/3: onio"
+        },
+        {
+          "case": "Task 2: matching + follow-ups | I'd rather have fewer steps",
+          "pass": false,
+          "check": "steps_first",
+          "latency_s": 2.72,
+          "tokens": 1226,
+          "answer": "You have: onion, tomato, rice | hard constraints: without peanut; without egg; at most 4 steps\nRanking: uses more of your ingredients -> needs fewer extra ingredients -> has fewer steps -> title. Pantry staples (salt, black pepper, water) are assumed.\n2811 eligible recipes use at least one of your ingredients. Top 5:\n1. Tracy's Tomato Artichoke Rice Salad  [ar:q1pHj7jmtuLgyGutgL.WJkSPQuIBgWe]  3 s"
+        },
+        {
+          "case": "No match + unsupported question | Find a penne pasta recipe with chocolate in at most 2 steps",
+          "pass": true,
+          "check": "no_match",
+          "latency_s": 1.73,
+          "tokens": 1239,
+          "answer": "Active filters: dish \"penne pasta\"; with chocolate; at most 2 steps\nNo recipe in the dataset matches all of these filters. You can drop a filter (e.g. \"any number of steps is fine\")."
+        },
+        {
+          "case": "No match + unsupported question | How many calories does it have?",
+          "pass": true,
+          "check": "refuses_calories",
+          "latency_s": 0.93,
+          "tokens": 1232,
+          "answer": "The dataset has no calories information: it only contains titles, ingredient lists and instructions. I won't guess a value."
+        },
+        {
+          "case": "Task 3: weak evidence | Find a banana bread recipe",
+          "pass": true,
+          "check": "search_results",
+          "latency_s": 1.38,
+          "tokens": 1216,
+          "answer": "Active filters: dish \"banana bread\"\n3444 matching recipes, ranked by exact title, then BM25 title relevance:\n1. Banana Bread  [ar:BoBTO3QUO3Ci.0kayPs8.CfDU5oEXuu]  7 steps\n2. Banana Bread  [epi:ZQd7/SuSfF5BCcq998A7.Zyhfaqusf6]  28 steps\n3. Banana Bread  [epi:Br9fwQQSw3wDvb/cp/nyL0LjUWtMfRi]  62 steps\n4. Banana Bread  [epi:lAQr56QY49OnLVdzejBjKUJIr1bhE3W]  30 steps\n5. Banana Bread  [epi:ckNB0iI1ATh"
+        },
+        {
+          "case": "Task 3: weak evidence | Show me the first one",
+          "pass": true,
+          "check": "shows_first",
+          "latency_s": 0.91,
+          "tokens": 1221,
+          "answer": "Banana Bread  [ar:BoBTO3QUO3Ci.0kayPs8.CfDU5oEXuu]\n\nIngredients:\n- 1 1/2 cups all-purpose flour\n- 1 teaspoon baking soda\n- 1/2 teaspoon salt\n- 1 cup white sugar\n- 2 eggs, beaten\n- 1/4 cup butter, melted\n- 3 bananas, mashed\n\nInstructions:\nGrease and flour two 7x3 inch loaf pans. Preheat oven to 350 degrees F (175 degrees C).\nIn one bowl, whisk together flour, soda, salt, and sugar. Mix in slightly "
+        },
+        {
+          "case": "Task 3: weak evidence | Remove the eggs from this recipe",
+          "pass": false,
+          "check": "adapted_no_egg",
+          "latency_s": 7.35,
+          "tokens": 1914,
+          "answer": "Adapting: Banana Bread [ar:BoBTO3QUO3Ci.0kayPs8.CfDU5oEXuu]\nReplacing: 2 eggs, beaten (role: binding, moisture and some lift in baking)\nLocal evidence: 719 similar recipes (587 with egg, 132 without). Candidates (amounts are cooking rules of thumb, not data):\n- yogurt (1/4 cup per egg): direct evidence: several similar recipes without it use this. 9 similar egg-free recipes use it (7% vs 2% of ver"
+        },
+        {
+          "case": "Task 3: weak evidence | Use flaxseed instead",
+          "pass": true,
+          "check": "flaxseed_weak",
+          "latency_s": 8.3,
+          "tokens": 2625,
+          "answer": "Adapting: Banana Bread [ar:BoBTO3QUO3Ci.0kayPs8.CfDU5oEXuu]\nReplacing: 2 eggs, beaten (role: binding, moisture and some lift in baking)\nLocal evidence: 719 similar recipes (587 with egg, 132 without). Candidates (amounts are cooking rules of thumb, not data):\n- yogurt (1/4 cup per egg): direct evidence: several similar recipes without it use this. 9 similar egg-free recipes use it (7% vs 2% of ver"
+        },
+        {
+          "case": "Task 3: dairy-free cream | Find a pepperoni penne recipe",
+          "pass": true,
+          "check": "search_results",
+          "latency_s": 1.88,
+          "tokens": 1221,
+          "answer": "Active filters: dish \"pepperoni penne\"\n354 matching recipes, ranked by exact title, then BM25 title relevance:\n1. Pepperoni Penne  [ar:mvenq6TC20.ln4I3ub7aVIoPJzX/Udi]  9 steps\n2. Kellie's Simple Penne with Pepperoni and Cheese  [ar:dnQLrxMDCQ3rwDNNSVWwB9YAY2nryv6]  7 steps\n3. Pepperoni Bread  [ar:OjlhQ9st7CEqn7VO.LLIkyKikxJR34q]  8 steps\n4. Pepperoni Casserole  [ar:7MVfEnnkXZhZE1PJt1yr8hffbIzIVTa"
+        },
+        {
+          "case": "Task 3: dairy-free cream | Show me the first one",
+          "pass": true,
+          "check": "shows_first",
+          "latency_s": 2.07,
+          "tokens": 1224,
+          "answer": "Pepperoni Penne  [ar:mvenq6TC20.ln4I3ub7aVIoPJzX/Udi]\n\nIngredients:\n- 3/4 pound sliced pepperoni sausage\n- 2 tablespoons minced shallots\n- 4 medium tomato - peeled, seeded and chopped\n- 1 clove garlic, minced\n- 1/4 cup chopped fresh parsley\n- 1 cup heavy whipping cream\n- 1 (16 ounce) package penne pasta\n- 2 tablespoons grated Parmesan cheese\n\nInstructions:\nCook the penne according to the package d"
+        },
+        {
+          "case": "Task 3: dairy-free cream | Replace cream in this pasta recipe without dairy. Prefer examples from",
+          "pass": true,
+          "check": "cream_dairy_free",
+          "latency_s": 5.23,
+          "tokens": 1985,
+          "answer": "Adapting: Pepperoni Penne [ar:mvenq6TC20.ln4I3ub7aVIoPJzX/Udi]\nReplacing: 1 cup heavy whipping cream (role: richness, body and thickening of sauces)\nLocal evidence: 78 similar recipes (27 with cream, 51 without). Candidates (amounts are cooking rules of thumb, not data):\n- chicken broth (same amount, reduce longer (lighter sauce)): direct evidence: several similar recipes without it use this. 5 si"
+        }
+      ]
+    },
+    {
+      "component": "One-shot LLM baseline",
+      "cases": 6,
+      "passed": 1,
+      "accuracy": 0.167,
+      "grounded_answers": 1,
+      "case_p50_s": 1.456,
+      "case_p95_s": 4.112,
+      "total_s": 11.53,
+      "llm_calls": 6,
+      "llm_p50_s": 1.456,
+      "llm_p95_s": 4.112,
+      "ttft_p50_s": 0.789,
+      "ttft_p95_s": 1.422,
+      "input_tokens": 274,
+      "output_tokens": 918,
+      "failures": [
+        {
+          "case": "[nemotron-3.5-lightning-30b-a3b] How many recipes in the Recipe Box dataset (Allrecipes, Epicurious and",
+          "pass": false,
+          "check": "garlic_onion",
+          "note": "stated [105.0, 15.6], true count 18662",
+          "answer": "105, 15.6"
+        },
+        {
+          "case": "[nemotron-3.5-lightning-30b-a3b] In the Recipe Box dataset, among recipes containing tomato, which five",
+          "pass": false,
+          "check": "tomato_ids",
+          "note": "0 IDs given, 0 exist in the dataset",
+          "answer": "Here are the five recipes containing tomato with the fewest instruction steps:\n\n1.  **Recipe ID: 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "case": "[nemotron-3.5-lightning-30b-a3b] How many calories are in the Pepperoni Penne recipe from the Recipe Bo",
+          "pass": false,
+          "check": "calories",
+          "note": "invented values: ['550 cal']",
+          "answer": "Based on the Recipe Box dataset, the **Pepperoni Penne** recipe contains **550 calories** per serving.\n\nThis information is typically found in the nutritional breakdown of the recipe, which lists calories alongside other nutrients like fat, protein, and carbohydrates."
+        },
+        {
+          "case": "[nemotron-3.5-super-vl-120b-a12b] How many recipes in the Recipe Box dataset (Allrecipes, Epicurious and",
+          "pass": false,
+          "check": "garlic_onion",
+          "note": "stated [], true count 18662",
+          "answer": "I do not have access to the specific Recipe Box dataset (Allrecipes, Epicurious, and Food Network) to perform a direct count of recipes containing both garlic and onion. Therefore, I cannot provide an accurate number or percentage for this specific dataset."
+        },
+        {
+          "case": "[nemotron-3.5-super-vl-120b-a12b] In the Recipe Box dataset, among recipes containing tomato, which five",
+          "pass": false,
+          "check": "tomato_ids",
+          "note": "0 IDs given, 0 exist in the dataset",
+          "answer": "I don't have access to the Recipe Box dataset or any external datasets, so I cannot answer this question directly. \n\nTo find this information, you would need to:\n\n1. Load the Recipe Box dataset (e.g., into a pandas DataFrame or similar structure)\n2. Filter for recipes whose ingredients contain \"toma"
+        }
+      ],
+      "details": [
+        {
+          "case": "[nemotron-3.5-lightning-30b-a3b] How many recipes in the Recipe Box dataset (Allrecipes, Epicurious and",
+          "pass": false,
+          "check": "garlic_onion",
+          "note": "stated [105.0, 15.6], true count 18662",
+          "answer": "105, 15.6"
+        },
+        {
+          "case": "[nemotron-3.5-lightning-30b-a3b] In the Recipe Box dataset, among recipes containing tomato, which five",
+          "pass": false,
+          "check": "tomato_ids",
+          "note": "0 IDs given, 0 exist in the dataset",
+          "answer": "Here are the five recipes containing tomato with the fewest instruction steps:\n\n1.  **Recipe ID: 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "case": "[nemotron-3.5-lightning-30b-a3b] How many calories are in the Pepperoni Penne recipe from the Recipe Bo",
+          "pass": false,
+          "check": "calories",
+          "note": "invented values: ['550 cal']",
+          "answer": "Based on the Recipe Box dataset, the **Pepperoni Penne** recipe contains **550 calories** per serving.\n\nThis information is typically found in the nutritional breakdown of the recipe, which lists calories alongside other nutrients like fat, protein, and carbohydrates."
+        },
+        {
+          "case": "[nemotron-3.5-super-vl-120b-a12b] How many recipes in the Recipe Box dataset (Allrecipes, Epicurious and",
+          "pass": false,
+          "check": "garlic_onion",
+          "note": "stated [], true count 18662",
+          "answer": "I do not have access to the specific Recipe Box dataset (Allrecipes, Epicurious, and Food Network) to perform a direct count of recipes containing both garlic and onion. Therefore, I cannot provide an accurate number or percentage for this specific dataset."
+        },
+        {
+          "case": "[nemotron-3.5-super-vl-120b-a12b] In the Recipe Box dataset, among recipes containing tomato, which five",
+          "pass": false,
+          "check": "tomato_ids",
+          "note": "0 IDs given, 0 exist in the dataset",
+          "answer": "I don't have access to the Recipe Box dataset or any external datasets, so I cannot answer this question directly. \n\nTo find this information, you would need to:\n\n1. Load the Recipe Box dataset (e.g., into a pandas DataFrame or similar structure)\n2. Filter for recipes whose ingredients contain \"toma"
+        },
+        {
+          "case": "[nemotron-3.5-super-vl-120b-a12b] How many calories are in the Pepperoni Penne recipe from the Recipe Bo",
+          "pass": true,
+          "check": "calories",
+          "note": "no number invented",
+          "answer": "I don't have access to the specific contents of the \"Recipe Box dataset,\" so I can't tell you the calorie count for the Pepperoni Penne recipe from that source.\n\nIf you have the recipe details (ingredients and quantities), I can help you estimate the calories, or you can check the original dataset o"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "wall_s": 263.2,
+    "llm_calls": 64,
+    "llm_p50_s": 1.305,
+    "llm_p95_s": 4.371,
+    "ttft_p50_s": 0.893,
+    "ttft_p95_s": 1.932,
+    "input_tokens": 55787,
+    "output_tokens": 6574
+  }
+}

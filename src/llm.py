@@ -4,6 +4,7 @@ All recipes, numbers and facts in answers come from Python (search.py / stats.py
 import os
 import re
 import time
+from collections import deque
 from functools import lru_cache
 from typing import Literal
 
@@ -121,6 +122,22 @@ def parse(message, active_filters):
     return _complete(prompt, Intent)
 
 
+CALLS = deque(maxlen=10_000)  # last LLM calls: model, latency, time to first token, tokens (read by eval/)
+
+
+def _call(name, max_tokens, prompt):
+    """Stream the answer so we can measure time to first token (TTFT); return the full text."""
+    start, ttft, msg = time.perf_counter(), None, None
+    for chunk in _model(name, max_tokens).stream(prompt):
+        if ttft is None and chunk.content:
+            ttft = time.perf_counter() - start
+        msg = chunk if msg is None else msg + chunk  # adding chunks also adds up token usage
+    usage = msg.usage_metadata or {}
+    CALLS.append({"model": name, "latency": time.perf_counter() - start, "ttft": ttft,
+                  "input_tokens": usage.get("input_tokens", 0), "output_tokens": usage.get("output_tokens", 0)})
+    return msg.content
+
+
 def _complete(prompt, schema, max_tokens=400, retries=2):
     """Call the model chain and validate its JSON with a Pydantic `schema`.
     Retries only temporary API errors; a failing model hands over to the next one."""
@@ -128,7 +145,7 @@ def _complete(prompt, schema, max_tokens=400, retries=2):
     for name in _models():  # try the fast model; switch to the fallback only if it fails
         for attempt in range(retries + 1):
             try:
-                text = _model(name, max_tokens).invoke(prompt).content
+                text = _call(name, max_tokens, prompt)
                 return schema.model_validate_json(text[text.find("{"): text.rfind("}") + 1])
             except Exception as e:
                 error = e
